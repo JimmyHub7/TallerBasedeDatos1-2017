@@ -29,6 +29,9 @@ public class Actor implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
+	@OneToMany(mappedBy="actor", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<FilmActor> film_actor;
+
 	public Actor() {
 	}
 
@@ -62,6 +65,10 @@ public class Actor implements Serializable {
 
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+
+	public List<FilmActor> getFilmActor() {
+		return this.film_actor;
 	}
 
 }

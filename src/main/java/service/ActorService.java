@@ -15,6 +15,9 @@ import javax.ws.rs.Produces;
 import facade.ActorFacade;
 import model.Actor;
 
+import facade.FilmActorFacade;
+import model.FilmActor;
+
 @Path("/actors")
 public class ActorService {
 	
@@ -35,7 +38,17 @@ public class ActorService {
     public Actor find(@PathParam("id") Integer id) {
         return actorFacadeEJB.find(id);
     }
-	
+
+//
+  @GET
+    @Path("{id}/films")
+    @Produces({"application/xml", "application/json"})
+    public List<FilmActor> search(@PathParam("id") Integer id) {
+        Actor actor = actorFacadeEJB.find(id);
+				return actor.getFilmActor();
+	}
+
+//	
 	@POST
     @Consumes({"application/xml", "application/json"})
     public void create(Actor entity) {
